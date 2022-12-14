@@ -11,11 +11,13 @@ using System.Management;
 using System.Runtime.InteropServices;
 using Windows.Foundation;
 using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace NarodResolutionUtility
 {
     public partial class singleForm : Form
     {
+        private RegistryKey? correctFolderKey = null;
 
         [DllImport("user32.dll")]
         static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
@@ -138,14 +140,12 @@ namespace NarodResolutionUtility
 
             #region Check for Registry Key
             RegistryKey topLevelKey = Registry.LocalMachine;
-            topLevelKey = topLevelKey.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Video", false);
-
-            RegistryKey? correctFolderKey = null;
+            topLevelKey = topLevelKey.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Video", true);
 
             foreach (string monitorFolderKey in topLevelKey.GetSubKeyNames())
             {
                 // at this point, it will need to open up the folders to see which is the monitor
-                RegistryKey folderKey = topLevelKey.OpenSubKey(monitorFolderKey);
+                RegistryKey folderKey = topLevelKey.OpenSubKey(monitorFolderKey, true);
                 foreach (string lowestFolderKey in folderKey.GetSubKeyNames())
                 {
                     RegistryKey keyValues = folderKey.OpenSubKey(lowestFolderKey);
@@ -153,7 +153,7 @@ namespace NarodResolutionUtility
                     {
                         if (keyName == "NV_Modes")
                         {
-                            correctFolderKey = folderKey;
+                            correctFolderKey = folderKey.OpenSubKey(lowestFolderKey, true);
                             compatibilityPanelRegLabel.Text = "Registry key exists!";
                             compatibilityPanelRegLabel.ForeColor = Color.Green;
                         }
@@ -245,6 +245,7 @@ namespace NarodResolutionUtility
 
         private void resolutionPanelFinishButton_Click(object sender, EventArgs e)
         {
+            List<String> resolutionList = new List<String>();
             if (resolutionPanelCustomCheckBox.Checked == true)
             {
                 if (resolutionPanelCustomBox.Text.Length== 0)
@@ -268,6 +269,23 @@ namespace NarodResolutionUtility
                     MessageBox.Show($"One (or more) of your custom resolutions is invalid. They should look like this, as an example.{Environment.NewLine}{Environment.NewLine}1600x900{Environment.NewLine}1280x720");
                     return;
                 }
+                Regex resolutionRegex = new Regex(@"\b[1-9]\d{2,3}x[1-9]\d{2,3}", RegexOptions.Compiled);
+                MatchCollection resolutionMatches = resolutionRegex.Matches(resolutionPanelCustomBox.Text);
+                string resolutionMatchesToString = "";
+                foreach (Match resolutionmatch in resolutionMatches)
+                {
+                    if (resolutionmatch.Value == "2560x1440")
+                    {
+                        resolutionMatchesToString += $"2560x1439 (from 2560x1440){Environment.NewLine}";
+                        resolutionList.Add("2560x1439");
+                    } else
+                    {
+                        resolutionMatchesToString += $"{resolutionmatch.Value}{Environment.NewLine}";
+                        resolutionList.Add(resolutionmatch.Value);
+                    }
+                }
+                DialogResult crConfirm = MessageBox.Show($"These are the custom resolutions detected, are these correct?{Environment.NewLine}{Environment.NewLine}{resolutionMatchesToString}", "NRU - Question", MessageBoxButtons.YesNo);
+                if(crConfirm == DialogResult.No ) { return; }
             } else
             {
                 if (resolutionPanel1440Box.Checked == false && resolutionPanel1152SUWBox.Checked == false && resolutionPanel1440UWBox.Checked == false)
@@ -275,7 +293,49 @@ namespace NarodResolutionUtility
                     MessageBox.Show("You need to check at least a single resolution to continue.");
                     return;
                 }
+                if (resolutionPanel1440Box.Checked)
+                {
+                    resolutionList.Add("2560x1439");
+                }
+                if (resolutionPanel1152SUWBox.Checked)
+                {
+                    resolutionList.Add("4096x1152");
+                }
+                if (resolutionPanel1440UWBox.Checked) 
+                {
+                    resolutionList.Add("3440x1440");
+                }
             }
+
+            string[] currentNVModes = ((IEnumerable<object>)correctFolderKey.GetValue("NV_Modes")).Cast<object>().Select(x => x.ToString()).ToArray();
+            List<String> currentNVModesTempList = new();
+            string normalisedNVModesString = "";
+            string resolutionRegistryBuilder = "";
+            foreach (string resolution in currentNVModes)
+            {
+                currentNVModesTempList.Add(resolution);
+                normalisedNVModesString += resolution;
+            }
+            foreach (string resolution in resolutionList)
+            {
+                if (normalisedNVModesString.Contains(resolution))
+                {
+                    MessageBox.Show($"Unable to continue as {resolution} is already added.");
+                    return;
+                } else
+                {
+                    resolutionRegistryBuilder += $"{resolution}x8,16,32,64=1F;";
+                }
+            }
+
+            currentNVModesTempList[currentNVModesTempList.Count-1] += $"; {resolutionRegistryBuilder}";
+
+            currentNVModes = currentNVModesTempList.ToArray();
+
+            correctFolderKey.SetValue("NV_Modes", currentNVModes, RegistryValueKind.MultiString);
+
+            MessageBox.Show("Resolution additions have been successful. Please restart, or use 'restart64.exe' as part of CRU.");
+            Application.Exit();
         }
     }
 }
