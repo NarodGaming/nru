@@ -14,7 +14,7 @@ using Microsoft.Win32;
 
 namespace NarodResolutionUtility
 {
-    public partial class welcomeRequirementsForm : Form
+    public partial class singleForm : Form
     {
 
         [DllImport("user32.dll")]
@@ -37,9 +37,14 @@ namespace NarodResolutionUtility
             return gpuNameList;
         }
 
-        public welcomeRequirementsForm()
+        public singleForm()
         {
             InitializeComponent();
+
+            nvidiaSettingsPanelVersionLabel.Text = $"Version: V{Application.ProductVersion}";
+            compatibilityPanelVersionLabel.Text = $"Version: V{Application.ProductVersion}";
+            welcomePanelAboutLabel.Text = $"ABOUT{Environment.NewLine}{Environment.NewLine}Version: V{Application.ProductVersion}";
+            resolutionPanelVersionLabel.Text = $"Version: V{Application.ProductVersion}";
         }
 
         private void welcomePanelExitButton_Click(object sender, EventArgs e)
@@ -56,6 +61,7 @@ namespace NarodResolutionUtility
         {
             compatibilityPanel.Visible = true;
             welcomePanel.Visible = false;
+            string textBuilder = "";
 
             #region GPU Manufacturer Checker
             List<string> gpuNameList = gpuNameFetcher();
@@ -63,6 +69,7 @@ namespace NarodResolutionUtility
             {
                 compatibilityPanelNvidiaLabel.Text = "Unable to verify GPU vendor. Only NVIDIA GPU's are supported.";
                 compatibilityPanelNvidiaLabel.ForeColor = Color.OrangeRed;
+                textBuilder += $"Warning: GPU detection failed, only NVIDIA GPU's are supported. (You can still continue){Environment.NewLine}";
             } else
             {
                 if(gpuNameList.Count == 1)
@@ -75,6 +82,7 @@ namespace NarodResolutionUtility
                     {
                         compatibilityPanelNvidiaLabel.Text = "Non-NVIDIA GPU detected. Only NVIDIA GPU's are supported.";
                         compatibilityPanelNvidiaLabel.ForeColor = Color.Red;
+                        textBuilder += $"Error: GPU detection found a non-NVIDIA GPU. You cannot continue.{Environment.NewLine}";
                     }
                 } else
                 {
@@ -89,10 +97,12 @@ namespace NarodResolutionUtility
                     {
                         compatibilityPanelNvidiaLabel.Text = "Multiple GPUs detected. NVIDIA GPU detected. NRU *may* work.";
                         compatibilityPanelNvidiaLabel.ForeColor = Color.Orange;
+                        textBuilder += $"Warning: Multiple GPUs detected. Proceed with caution.{Environment.NewLine}";
                     } else
                     {
                         compatibilityPanelNvidiaLabel.Text = "Multiple GPUs detected. No NVIDIA GPU detected. Only NVIDIA GPU's are supported.";
                         compatibilityPanelNvidiaLabel.ForeColor = Color.Red;
+                        textBuilder += $"Error: No NVIDIA GPU detected. You cannot continue.{Environment.NewLine}";
                     }
                 }
             }
@@ -101,6 +111,7 @@ namespace NarodResolutionUtility
             #region Monitor Checker
             // to do, implement a good way of checking if a g9 / neo g9 is connected
             compatibilityPanelMonitorLabel.Text = "Monitor check is not currently implemented.";
+            textBuilder += $"Advisory: Monitor detection not yet implemented. Neo G9/G9 are supported at the moment.{Environment.NewLine}";
             #endregion
 
             #region Multiple Monitors Checker
@@ -116,10 +127,12 @@ namespace NarodResolutionUtility
             {
                 compatibilityPanelMonitorsLabel.Text = "Multiple monitors detected. NRU may intefere with other monitors.";
                 compatibilityPanelMonitorsLabel.ForeColor = Color.Orange;
+                textBuilder += $"Warning: Multiple monitors detected. Proceed with caution.{Environment.NewLine}";
             } else
             {
                 compatibilityPanelMonitorsLabel.Text = "Multiple monitor detection failed. You can still continue.";
                 compatibilityPanelMonitorsLabel.ForeColor = Color.Orange;
+                textBuilder += $"Warning: Unknown number of monitors. Proceed with caution.{Environment.NewLine}";
             }
             #endregion
 
@@ -151,6 +164,7 @@ namespace NarodResolutionUtility
             {
                 compatibilityPanelRegLabel.Text = "Registry key could not be located.";
                 compatibilityPanelRegLabel.ForeColor = Color.Red;
+                textBuilder += $"Error: Could not find resolution registry key. You cannot continue.{Environment.NewLine}";
             }
             #endregion
 
@@ -169,16 +183,99 @@ namespace NarodResolutionUtility
             {
                 compatibilityPanelWindowsCheck.Text = "Windows 8/8.1 detected. These are not supported.";
                 compatibilityPanelWindowsCheck.ForeColor = Color.Red;
+                textBuilder += $"Error: Your Windows version (and NVIDIA driver version) are too old. You cannot continue.{Environment.NewLine}";
             } else if (buildNumber >= 7601)
             {
                 compatibilityPanelWindowsCheck.Text = "Windows 7 detected. NRU *should* work correctly.";
                 compatibilityPanelWindowsCheck.ForeColor = Color.OrangeRed;
+                textBuilder += $"Warning: Your Windows version is old. Proceed with caution.{Environment.NewLine}";
             } else
             {
                 compatibilityPanelWindowsCheck.Text = "Very old Windows detected (Vista or older?). This is not supported.";
                 compatibilityPanelWindowsCheck.ForeColor = Color.Red;
+                textBuilder += $"Error: Your Windows version is extremely old. You cannot continue.{Environment.NewLine}";
             }
             #endregion
+
+            if(textBuilder == $"Advisory: Monitor detection not yet implemented. Neo G9/G9 are supported at the moment.{Environment.NewLine}")
+            {
+                textBuilder += $"{Environment.NewLine}Your system has passed all checks successfully.";
+            }
+
+            if(textBuilder.Contains("Error") == false)
+            {
+                compatibilityPanelProceedButton.Enabled = true;
+                textBuilder += $"{Environment.NewLine}The next page will walk you through the pre-requirements.";
+            }
+
+            compatibilityPanelDescriptionLabel.Text = textBuilder;
+        }
+
+        private void compatibilityPanelProceedButton_Click(object sender, EventArgs e)
+        {
+            compatibilityPanel.Visible = false;
+            nvidiaSettingsPanel.Visible = true;
+        }
+
+        private void nvidiaSettingsPanelProceedButton_Click(object sender, EventArgs e)
+        {
+            nvidiaSettingsPanel.Visible = false;
+            resolutionPanel.Visible = true;
+        }
+
+        private void resolutionPanelCustomCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (resolutionPanelCustomCheckBox.Checked == true)
+            {
+                resolutionPanel1440Box.Checked = false;
+                resolutionPanel1440Box.Enabled = false;
+                resolutionPanel1152SUWBox.Checked = false;
+                resolutionPanel1152SUWBox.Enabled = false;
+                resolutionPanel1440UWBox.Checked = false;
+                resolutionPanel1440UWBox.Enabled = false;
+                resolutionPanelCustomBox.ReadOnly = false;
+            } else
+            {
+                resolutionPanel1440Box.Enabled = true;
+                resolutionPanel1152SUWBox.Enabled = true;
+                resolutionPanel1440UWBox.Enabled = true;
+                resolutionPanelCustomBox.ReadOnly = true;
+            }
+        }
+
+        private void resolutionPanelFinishButton_Click(object sender, EventArgs e)
+        {
+            if (resolutionPanelCustomCheckBox.Checked == true)
+            {
+                if (resolutionPanelCustomBox.Text.Length== 0)
+                {
+                    MessageBox.Show("You need to enter at least a single custom resolution to continue.");
+                    return;
+                }
+                bool hasInvalidLine = false;
+                string[] resolutions = resolutionPanelCustomBox.Text.Split(Environment.NewLine);
+                foreach (string resolution in resolutions)
+                {
+                    if (resolution == null || resolution.Length == 0) { continue; }
+                    if (resolution.Contains("x") == false)
+                    {
+                        hasInvalidLine = true;
+                        break;
+                    }
+                }
+                if (hasInvalidLine)
+                {
+                    MessageBox.Show($"One (or more) of your custom resolutions is invalid. They should look like this, as an example.{Environment.NewLine}{Environment.NewLine}1600x900{Environment.NewLine}1280x720");
+                    return;
+                }
+            } else
+            {
+                if (resolutionPanel1440Box.Checked == false && resolutionPanel1152SUWBox.Checked == false && resolutionPanel1440UWBox.Checked == false)
+                {
+                    MessageBox.Show("You need to check at least a single resolution to continue.");
+                    return;
+                }
+            }
         }
     }
 }

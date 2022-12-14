@@ -66,4 +66,24 @@ First, NRU will check your computer to ensure it is compatible.
 
 When you're ready, please click 'Proceed' to continue.</value>
   </data>
+  <data name="nvidiaSettingsPanelHowtoLabel.Text" xml:space="preserve">
+    <value>1) Right click your desktop
+1b) (Win11) Click 'Show more options'
+
+2) Click 'NVIDIA Control Panel'
+
+3) Go to 'Adjust desktop size and position'
+
+4) Choose your Neo G9 / G9 (if multiple monitors connected)
+
+5) Under 'Scaling', change 'Perform scaling on' to 'GPU', check the box underneath too.
+
+6) Click 'Apply', the screen may flicker.
+
+TROUBLESHOOTING
+
+Q) No NVIDIA settings on desktop menu?
+
+A) Likely a driver issue, I would recommend re-installing the latest driver.</value>
+  </data>
 </root>

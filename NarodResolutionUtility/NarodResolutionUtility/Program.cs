@@ -26,7 +26,7 @@ namespace NarodResolutionUtility
         }
         protected override void OnCreateMainForm()
         {
-            MainForm = new LicenseForm();
+            MainForm = new singleForm();
         }
     }
 }
