@@ -19,13 +19,13 @@ NRU is a utility which helps to make registry edits, to allow resolutions on mon
 
 With NRU, you can:
 
-- Add new resolutions (2560x1440, 3440x1440 & more).
-- Remove any previously added custom resolutions.
+- Add new pre-set resolutions (currently 2560x1440, 3440x1440, 4096x1152)
+- Add new custom resolutions (manually typed in)
 
 ## Limitations
 
 - NVIDIA resets this on driver updates, so you'll need to run the utility again.
-- Multiple monitors may cause issues. NRU will walk you through steps to prevent this, but you can also temporarily unplug them.
+- Multiple monitors may cause issues. It has not in my testing - but you may wish to unplug them whilst running the utility.
 - NRU is in it's infancy - it may not work for you right now, but this will be continually improved upon.
 
 ## Helping NRU
