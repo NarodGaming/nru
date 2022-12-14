@@ -33,7 +33,6 @@
             this.welcomePanelProceedButton = new System.Windows.Forms.Button();
             this.welcomePanelExitButton = new System.Windows.Forms.Button();
             this.welcomePanelAboutLabel = new System.Windows.Forms.Label();
-            this.welcomePanelCreditsLabel = new System.Windows.Forms.Label();
             this.welcomePanelIntroLabel = new System.Windows.Forms.Label();
             this.welcomePanelWelcomeLabel = new System.Windows.Forms.Label();
             this.compatibilityPanel = new System.Windows.Forms.Panel();
@@ -54,18 +53,19 @@
             this.nvidiaSettingsPanelVersionLabel = new System.Windows.Forms.Label();
             this.nvidiaSettingsPanelTitleLabel = new System.Windows.Forms.Label();
             this.resolutionPanel = new System.Windows.Forms.Panel();
+            this.resolutionPanelCustomBox = new System.Windows.Forms.TextBox();
+            this.resolutionPanelCustomCheckBox = new System.Windows.Forms.CheckBox();
+            this.resolutionPanel1152SUWBox = new System.Windows.Forms.CheckBox();
+            this.resolutionsPanelSRLabel = new System.Windows.Forms.Label();
+            this.resolutionPanel1440UWBox = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.resolutionPanel1440Box = new System.Windows.Forms.CheckBox();
+            this.resolutionPanelCRLabel = new System.Windows.Forms.Label();
             this.resolutionPanelFinishButton = new System.Windows.Forms.Button();
             this.resolutionPanelExitButton = new System.Windows.Forms.Button();
             this.resolutionPanelVersionLabel = new System.Windows.Forms.Label();
             this.resolutionPanelTitleLabel = new System.Windows.Forms.Label();
-            this.resolutionPanelCRLabel = new System.Windows.Forms.Label();
-            this.resolutionPanel1440Box = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.resolutionPanel1440UWBox = new System.Windows.Forms.CheckBox();
-            this.resolutionsPanelSRLabel = new System.Windows.Forms.Label();
-            this.resolutionPanel1152SUWBox = new System.Windows.Forms.CheckBox();
-            this.resolutionPanelCustomCheckBox = new System.Windows.Forms.CheckBox();
-            this.resolutionPanelCustomBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.welcomePanel.SuspendLayout();
             this.compatibilityPanel.SuspendLayout();
             this.nvidiaSettingsPanel.SuspendLayout();
@@ -74,10 +74,10 @@
             // 
             // welcomePanel
             // 
+            this.welcomePanel.Controls.Add(this.label2);
             this.welcomePanel.Controls.Add(this.welcomePanelProceedButton);
             this.welcomePanel.Controls.Add(this.welcomePanelExitButton);
             this.welcomePanel.Controls.Add(this.welcomePanelAboutLabel);
-            this.welcomePanel.Controls.Add(this.welcomePanelCreditsLabel);
             this.welcomePanel.Controls.Add(this.welcomePanelIntroLabel);
             this.welcomePanel.Controls.Add(this.welcomePanelWelcomeLabel);
             this.welcomePanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -109,20 +109,11 @@
             // welcomePanelAboutLabel
             // 
             this.welcomePanelAboutLabel.AutoSize = true;
-            this.welcomePanelAboutLabel.Location = new System.Drawing.Point(480, 227);
+            this.welcomePanelAboutLabel.Location = new System.Drawing.Point(521, 338);
             this.welcomePanelAboutLabel.Name = "welcomePanelAboutLabel";
             this.welcomePanelAboutLabel.Size = new System.Drawing.Size(91, 45);
             this.welcomePanelAboutLabel.TabIndex = 3;
             this.welcomePanelAboutLabel.Text = "ABOUT:\r\n\r\nVersion: V1.0.0.0";
-            // 
-            // welcomePanelCreditsLabel
-            // 
-            this.welcomePanelCreditsLabel.AutoSize = true;
-            this.welcomePanelCreditsLabel.Location = new System.Drawing.Point(25, 227);
-            this.welcomePanelCreditsLabel.Name = "welcomePanelCreditsLabel";
-            this.welcomePanelCreditsLabel.Size = new System.Drawing.Size(174, 45);
-            this.welcomePanelCreditsLabel.TabIndex = 2;
-            this.welcomePanelCreditsLabel.Text = "CREDITS:\r\n\r\nNarod / NarodGaming - Author";
             // 
             // welcomePanelIntroLabel
             // 
@@ -130,7 +121,7 @@
             this.welcomePanelIntroLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.welcomePanelIntroLabel.Location = new System.Drawing.Point(25, 52);
             this.welcomePanelIntroLabel.Name = "welcomePanelIntroLabel";
-            this.welcomePanelIntroLabel.Size = new System.Drawing.Size(546, 119);
+            this.welcomePanelIntroLabel.Size = new System.Drawing.Size(546, 204);
             this.welcomePanelIntroLabel.TabIndex = 1;
             this.welcomePanelIntroLabel.Text = resources.GetString("welcomePanelIntroLabel.Text");
             // 
@@ -341,6 +332,87 @@
             this.resolutionPanel.TabIndex = 3;
             this.resolutionPanel.Visible = false;
             // 
+            // resolutionPanelCustomBox
+            // 
+            this.resolutionPanelCustomBox.Location = new System.Drawing.Point(25, 278);
+            this.resolutionPanelCustomBox.Multiline = true;
+            this.resolutionPanelCustomBox.Name = "resolutionPanelCustomBox";
+            this.resolutionPanelCustomBox.PlaceholderText = "Enter each resolution on a new line. Example: 1600x900";
+            this.resolutionPanelCustomBox.ReadOnly = true;
+            this.resolutionPanelCustomBox.Size = new System.Drawing.Size(359, 105);
+            this.resolutionPanelCustomBox.TabIndex = 13;
+            // 
+            // resolutionPanelCustomCheckBox
+            // 
+            this.resolutionPanelCustomCheckBox.AutoSize = true;
+            this.resolutionPanelCustomCheckBox.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.resolutionPanelCustomCheckBox.Location = new System.Drawing.Point(25, 253);
+            this.resolutionPanelCustomCheckBox.Name = "resolutionPanelCustomCheckBox";
+            this.resolutionPanelCustomCheckBox.Size = new System.Drawing.Size(359, 19);
+            this.resolutionPanelCustomCheckBox.TabIndex = 12;
+            this.resolutionPanelCustomCheckBox.Text = "Enable Custom Resolutions (this WILL disable the above boxes)";
+            this.resolutionPanelCustomCheckBox.UseVisualStyleBackColor = true;
+            this.resolutionPanelCustomCheckBox.CheckedChanged += new System.EventHandler(this.resolutionPanelCustomCheckBox_CheckedChanged);
+            // 
+            // resolutionPanel1152SUWBox
+            // 
+            this.resolutionPanel1152SUWBox.AutoSize = true;
+            this.resolutionPanel1152SUWBox.Location = new System.Drawing.Point(38, 183);
+            this.resolutionPanel1152SUWBox.Name = "resolutionPanel1152SUWBox";
+            this.resolutionPanel1152SUWBox.Size = new System.Drawing.Size(184, 19);
+            this.resolutionPanel1152SUWBox.TabIndex = 11;
+            this.resolutionPanel1152SUWBox.Text = "4096x1152 (64% of 5120x1440)";
+            this.resolutionPanel1152SUWBox.UseVisualStyleBackColor = true;
+            // 
+            // resolutionsPanelSRLabel
+            // 
+            this.resolutionsPanelSRLabel.AutoSize = true;
+            this.resolutionsPanelSRLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.resolutionsPanelSRLabel.Location = new System.Drawing.Point(25, 158);
+            this.resolutionsPanelSRLabel.Name = "resolutionsPanelSRLabel";
+            this.resolutionsPanelSRLabel.Size = new System.Drawing.Size(109, 15);
+            this.resolutionsPanelSRLabel.TabIndex = 10;
+            this.resolutionsPanelSRLabel.Text = "Scaled Resolutions:";
+            // 
+            // resolutionPanel1440UWBox
+            // 
+            this.resolutionPanel1440UWBox.AutoSize = true;
+            this.resolutionPanel1440UWBox.Location = new System.Drawing.Point(38, 110);
+            this.resolutionPanel1440UWBox.Name = "resolutionPanel1440UWBox";
+            this.resolutionPanel1440UWBox.Size = new System.Drawing.Size(80, 19);
+            this.resolutionPanel1440UWBox.TabIndex = 9;
+            this.resolutionPanel1440UWBox.Text = "3440x1440";
+            this.resolutionPanel1440UWBox.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(131, 414);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(105, 15);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "*Will be 2560x1439";
+            // 
+            // resolutionPanel1440Box
+            // 
+            this.resolutionPanel1440Box.AutoSize = true;
+            this.resolutionPanel1440Box.Location = new System.Drawing.Point(38, 85);
+            this.resolutionPanel1440Box.Name = "resolutionPanel1440Box";
+            this.resolutionPanel1440Box.Size = new System.Drawing.Size(85, 19);
+            this.resolutionPanel1440Box.TabIndex = 7;
+            this.resolutionPanel1440Box.Text = "2560x1440*";
+            this.resolutionPanel1440Box.UseVisualStyleBackColor = true;
+            // 
+            // resolutionPanelCRLabel
+            // 
+            this.resolutionPanelCRLabel.AutoSize = true;
+            this.resolutionPanelCRLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.resolutionPanelCRLabel.Location = new System.Drawing.Point(25, 67);
+            this.resolutionPanelCRLabel.Name = "resolutionPanelCRLabel";
+            this.resolutionPanelCRLabel.Size = new System.Drawing.Size(124, 15);
+            this.resolutionPanelCRLabel.TabIndex = 6;
+            this.resolutionPanelCRLabel.Text = "Common Resolutions:";
+            // 
             // resolutionPanelFinishButton
             // 
             this.resolutionPanelFinishButton.Location = new System.Drawing.Point(471, 389);
@@ -379,96 +451,25 @@
             this.resolutionPanelTitleLabel.TabIndex = 0;
             this.resolutionPanelTitleLabel.Text = "NRU - Add Resolutions";
             // 
-            // resolutionPanelCRLabel
+            // label2
             // 
-            this.resolutionPanelCRLabel.AutoSize = true;
-            this.resolutionPanelCRLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.resolutionPanelCRLabel.Location = new System.Drawing.Point(25, 67);
-            this.resolutionPanelCRLabel.Name = "resolutionPanelCRLabel";
-            this.resolutionPanelCRLabel.Size = new System.Drawing.Size(124, 15);
-            this.resolutionPanelCRLabel.TabIndex = 6;
-            this.resolutionPanelCRLabel.Text = "Common Resolutions:";
-            // 
-            // resolutionPanel1440Box
-            // 
-            this.resolutionPanel1440Box.AutoSize = true;
-            this.resolutionPanel1440Box.Location = new System.Drawing.Point(38, 85);
-            this.resolutionPanel1440Box.Name = "resolutionPanel1440Box";
-            this.resolutionPanel1440Box.Size = new System.Drawing.Size(85, 19);
-            this.resolutionPanel1440Box.TabIndex = 7;
-            this.resolutionPanel1440Box.Text = "2560x1440*";
-            this.resolutionPanel1440Box.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(131, 414);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 15);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "*Will be 2560x1439";
-            // 
-            // resolutionPanel1440UWBox
-            // 
-            this.resolutionPanel1440UWBox.AutoSize = true;
-            this.resolutionPanel1440UWBox.Location = new System.Drawing.Point(38, 110);
-            this.resolutionPanel1440UWBox.Name = "resolutionPanel1440UWBox";
-            this.resolutionPanel1440UWBox.Size = new System.Drawing.Size(80, 19);
-            this.resolutionPanel1440UWBox.TabIndex = 9;
-            this.resolutionPanel1440UWBox.Text = "3440x1440";
-            this.resolutionPanel1440UWBox.UseVisualStyleBackColor = true;
-            // 
-            // resolutionsPanelSRLabel
-            // 
-            this.resolutionsPanelSRLabel.AutoSize = true;
-            this.resolutionsPanelSRLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.resolutionsPanelSRLabel.Location = new System.Drawing.Point(25, 158);
-            this.resolutionsPanelSRLabel.Name = "resolutionsPanelSRLabel";
-            this.resolutionsPanelSRLabel.Size = new System.Drawing.Size(109, 15);
-            this.resolutionsPanelSRLabel.TabIndex = 10;
-            this.resolutionsPanelSRLabel.Text = "Scaled Resolutions:";
-            // 
-            // resolutionPanel1152SUWBox
-            // 
-            this.resolutionPanel1152SUWBox.AutoSize = true;
-            this.resolutionPanel1152SUWBox.Location = new System.Drawing.Point(38, 183);
-            this.resolutionPanel1152SUWBox.Name = "resolutionPanel1152SUWBox";
-            this.resolutionPanel1152SUWBox.Size = new System.Drawing.Size(184, 19);
-            this.resolutionPanel1152SUWBox.TabIndex = 11;
-            this.resolutionPanel1152SUWBox.Text = "4096x1152 (64% of 5120x1440)";
-            this.resolutionPanel1152SUWBox.UseVisualStyleBackColor = true;
-            // 
-            // resolutionPanelCustomCheckBox
-            // 
-            this.resolutionPanelCustomCheckBox.AutoSize = true;
-            this.resolutionPanelCustomCheckBox.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.resolutionPanelCustomCheckBox.Location = new System.Drawing.Point(25, 253);
-            this.resolutionPanelCustomCheckBox.Name = "resolutionPanelCustomCheckBox";
-            this.resolutionPanelCustomCheckBox.Size = new System.Drawing.Size(359, 19);
-            this.resolutionPanelCustomCheckBox.TabIndex = 12;
-            this.resolutionPanelCustomCheckBox.Text = "Enable Custom Resolutions (this WILL disable the above boxes)";
-            this.resolutionPanelCustomCheckBox.UseVisualStyleBackColor = true;
-            this.resolutionPanelCustomCheckBox.CheckedChanged += new System.EventHandler(this.resolutionPanelCustomCheckBox_CheckedChanged);
-            // 
-            // resolutionPanelCustomBox
-            // 
-            this.resolutionPanelCustomBox.Location = new System.Drawing.Point(25, 278);
-            this.resolutionPanelCustomBox.Multiline = true;
-            this.resolutionPanelCustomBox.Name = "resolutionPanelCustomBox";
-            this.resolutionPanelCustomBox.PlaceholderText = "Enter each resolution on a new line. Example: 1600x900";
-            this.resolutionPanelCustomBox.ReadOnly = true;
-            this.resolutionPanelCustomBox.Size = new System.Drawing.Size(359, 105);
-            this.resolutionPanelCustomBox.TabIndex = 13;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(131, 399);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(294, 30);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Thanks to u/spaghettiduders on r/ultrawidemasterrace\r\nfor the guide on how to do " +
+    "this.";
             // 
             // singleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.welcomePanel);
             this.Controls.Add(this.resolutionPanel);
             this.Controls.Add(this.nvidiaSettingsPanel);
             this.Controls.Add(this.compatibilityPanel);
-            this.Controls.Add(this.welcomePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "singleForm";
@@ -491,7 +492,6 @@
         private Panel welcomePanel;
         private Label welcomePanelIntroLabel;
         private Label welcomePanelWelcomeLabel;
-        private Label welcomePanelCreditsLabel;
         private Label welcomePanelAboutLabel;
         private Button welcomePanelProceedButton;
         private Button welcomePanelExitButton;
@@ -525,5 +525,6 @@
         private CheckBox resolutionPanel1152SUWBox;
         private CheckBox resolutionPanelCustomCheckBox;
         private TextBox resolutionPanelCustomBox;
+        private Label label2;
     }
 }

@@ -62,6 +62,11 @@
 
 This utility will walk you through the whole process.
 
+PLEASE NOTE: This utility is not guaranteed to always work, and may cause issues
+on some systems. Every effort has been made to ensure this does not occur, but
+you have been warned. Re-installing your drivers (in safe-mode, if needed) should
+fix any and all issues that may arise.
+
 First, NRU will check your computer to ensure it is compatible.
 
 When you're ready, please click 'Proceed' to continue.</value>
